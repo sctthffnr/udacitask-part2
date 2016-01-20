@@ -12,9 +12,9 @@ module Listable
   end
 
   def format_priority
-    value = ' ⇧' if @priority == 'high'
-    value = ' ⇨' if @priority == 'medium'
-    value = ' ⇩' if @priority == 'low'
+    value = ' ⇧'.colorize(:red) if @priority == 'high'
+    value = ' ⇨'.colorize(:green) if @priority == 'medium'
+    value = ' ⇩'.colorize(:blue) if @priority == 'low'
     value = ' ' unless @priority
     value
   end

@@ -1,6 +1,4 @@
 class UdaciList
-  include UdaciListErrors
-
   attr_reader :title, :items
 
   def initialize(options = {})
@@ -12,9 +10,9 @@ class UdaciList
     type = type.downcase
     verify_type(type.downcase)
     verify_priority(options[:priority]) if options[:priority]
-    @items.push TodoItem.new(description, options) if type == 'todo'
-    @items.push EventItem.new(description, options) if type == 'event'
-    @items.push LinkItem.new(description, options) if type == 'link'
+    @items.push TodoItem.new(description, type, options) if type == 'todo'
+    @items.push EventItem.new(description, type, options) if type == 'event'
+    @items.push LinkItem.new(description, type, options) if type == 'link'
   end
 
   def delete(index)
@@ -22,24 +20,36 @@ class UdaciList
     @items.delete_at(index - 1)
   end
 
-  def all
-    puts '-' * @title.length
-    puts @title
-    puts '-' * @title.length
+  def all(type = '')
+    rows = gather_details(type)
+    puts Terminal::Table.new(title: @title, rows: rows)
+  end
+
+  def gather_details(type)
+    rows = []
     @items.each_with_index do |item, position|
-      puts "#{position + 1}) #{item.details}"
+      if type == ''
+        rows.push item.details
+      elsif item.type == type
+        rows.push item.details
+      end
     end
+    rows
+  end
+
+  def filter(type)
+    all(type)
   end
 
   private
 
   def verify_type(type)
     valid_types = %w(todo event link)
-    fail InvalidItemType unless valid_types.include?(type)
+    fail UdaciList::InvalidItemType unless valid_types.include?(type)
   end
 
   def verify_priority(priority)
     valid_priorities = %w(low medium high)
-    fail InvalidPriorityValue unless valid_priorities.include?(priority)
+    fail UdaciList::InvalidPriorityValue unless valid_priorities.include?(priority)
   end
 end
