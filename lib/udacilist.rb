@@ -8,7 +8,7 @@ class UdaciList
 
   def add(type, description, options = {})
     type = type.downcase
-    verify_type(type.downcase)
+    verify_type(type)
     verify_priority(options[:priority]) if options[:priority]
     @items.push TodoItem.new(description, type, options) if type == 'todo'
     @items.push EventItem.new(description, type, options) if type == 'event'
