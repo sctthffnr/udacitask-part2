@@ -27,7 +27,8 @@ class UdaciList
 
   def gather_details(type)
     rows = []
-    @items.each_with_index do |item, position|
+    # TODO: put position # back in somehow
+    @items.each do |item|
       if type == ''
         rows.push item.details
       elsif item.type == type
@@ -41,6 +42,23 @@ class UdaciList
     all(type)
   end
 
+  def find_todo(description)
+    items.each do |item|
+      return item if item.description == description
+    end
+  end
+
+  def change_priority(todo, priority)
+    verify_priority(priority)
+    result = find_todo(todo)
+    result.priority = priority
+  end
+
+  def change_due_date(todo, date)
+    result = find_todo(todo)
+    result.due = Chronic.parse(date)
+  end
+
   private
 
   def verify_type(type)
@@ -50,6 +68,8 @@ class UdaciList
 
   def verify_priority(priority)
     valid_priorities = %w(low medium high)
-    fail UdaciList::InvalidPriorityValue unless valid_priorities.include?(priority)
+    unless valid_priorities.include?(priority)
+      fail UdaciList::InvalidPriorityValue
+    end
   end
 end

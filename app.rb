@@ -40,8 +40,16 @@ new_list.add("link", "http://ruby-doc.org")
 
 # DISPLAY UNTITLED LIST
 # ---------------------
-# new_list.all
+new_list.all
 
 # DEMO FILTER BY ITEM TYPE
 # ------------------------
 new_list.filter("event")
+
+# DEMO CHANGING PRIORITY AND DATE FOR TODO Item
+new_list.change_priority('Buy more dog food', 'low')
+new_list.change_due_date('Buy more dog food', 'in 8 weeks')
+new_list.change_priority('Go dancing', 'high')
+new_list.change_due_date('Buy groceries', 'in 5 days')
+new_list.change_priority('Buy groceries', 'low')
+new_list.all
