@@ -16,8 +16,11 @@ class UdaciList
   end
 
   def delete(index)
-    fail IndexExceedsListSize if index >= @items.length
-    @items.delete_at(index - 1)
+    if index.class == Fixnum
+      delete_one_item(index)
+    elsif index.class == Array
+      delete_multiple_items(index)
+    end
   end
 
   def all(type = '')
@@ -70,6 +73,29 @@ class UdaciList
     valid_priorities = %w(low medium high)
     unless valid_priorities.include?(priority)
       fail UdaciList::InvalidPriorityValue
+    end
+  end
+
+  def verify_index(index)
+    fail IndexExceedsListSize if index >= @items.length
+  end
+
+  def delete_one_item(index)
+    verify_index(index)
+    @items.delete_at(index - 1)
+  end
+
+  def delete_multiple_items(indexes)
+    # The counter is needed to delete the proper index number during each
+    # interation, since the items in the list change index values when an
+    # item is deleted
+    counter = 0
+    # The index array must be in order for the counter to work
+    indexes.sort!
+    indexes.each do |index|
+      verify_index(index)
+      @items.delete_at(index - counter - 1)
+      counter += 1
     end
   end
 end
