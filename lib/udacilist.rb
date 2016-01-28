@@ -66,18 +66,18 @@ class UdaciList
 
   def verify_type(type)
     valid_types = %w(todo event link)
-    fail UdaciList::InvalidItemType unless valid_types.include?(type)
+    fail UdaciListErrors::InvalidItemType unless valid_types.include?(type)
   end
 
   def verify_priority(priority)
     valid_priorities = %w(low medium high)
     unless valid_priorities.include?(priority)
-      fail UdaciList::InvalidPriorityValue
+      fail UdaciListErrors::InvalidPriorityValue
     end
   end
 
   def verify_index(index)
-    fail IndexExceedsListSize if index >= @items.length
+    fail UdaciListErrors::IndexExceedsListSize if index >= @items.length
   end
 
   def delete_one_item(index)

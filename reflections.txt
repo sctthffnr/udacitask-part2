@@ -1,13 +1,14 @@
-# What you added to Udacitask 2.0
-# -------------------------------------------------------
-1. What is the gem of your choice and how did you use it?
-2. Describe the 2 features you added to the project.
-  a) Feature 1...
-  b) Feature 2...
+This project took me around 4 hours to complete. While I have been learning Ruby, I have been trying to learn best practices
+for coding. I discovered the gem rubocop and also discovered that the Atom IDE has lint support for rubocop. This has helped
+me adhere to community best practices, so I no longer spend time wondering whether an expression that I wrote is considered
+to be in the ruby style.
 
-# REFLECTIONS
-# -------------------------------------------------------
-1. How long did you spend working on this project?
-2. What was the most rewarding challenge you conquered?
-3. What two additional features did you build? Why?
-4. Where do you still have room to grow?
+The gem of my choice that I used was terminal-table. I like my output to be in a nice, clear tabular format. I also included
+another gem, highline, to add some interactive features to the app.
+
+I added features to change the priority and due date for a todo item. I combined these with the highline app so that users
+would have to explicitly enter how they wanted the priority and due date to change. This is missing some error handling, but
+it works as long as the input is right. I also added a feature to delete more than one item at a time.
+
+Now that I feel comfortable with OOP principles and with the language in general, I would like to learn more about the standard
+ruby library. I am sure that I am creating code that could be more succinctly expressed with a built-in ruby construct.

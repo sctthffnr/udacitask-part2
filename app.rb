@@ -48,16 +48,16 @@ new_list.all
 new_list.filter('event')
 
 # DEMO CHANGING PRIORITY AND DATE FOR TODO Item with HighLine
-# cli = HighLine.new
-# todo = cli.ask 'What todo item do you wish to alter?'
-# attribute = cli.ask 'Do you wish to change the priority or the date?'
-# if attribute == 'priority'
-#   priority = cli.ask 'What is the new priority level?'
-#   new_list.change_priority(todo, priority)
-# elsif attribute == 'date'
-#   date = cli.ask 'What is the new due date?'
-#   new_list.change_due_date(todo, date)
-# end
-# new_list.all
+cli = HighLine.new
+todo = cli.ask 'What todo item do you wish to alter?'
+attribute = cli.ask 'Do you wish to change the priority or the date?'
+if attribute == 'priority'
+  priority = cli.ask 'What is the new priority level?'
+  new_list.change_priority(todo, priority)
+elsif attribute == 'date'
+  date = cli.ask 'What is the new due date?'
+  new_list.change_due_date(todo, date)
+end
+new_list.all
 new_list.delete([1, 3, 5])
 new_list.all
